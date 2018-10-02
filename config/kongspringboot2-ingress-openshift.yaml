@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kong-springboot2
+spec:
+  rules:
+  - host: kong.springboot2
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: kong-springboot2
+          servicePort: 8090

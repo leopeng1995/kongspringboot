@@ -1,0 +1,57 @@
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kong-springboot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kong-springboot
+  template:
+    metadata:
+      labels:
+        app: kong-springboot
+    spec:
+      containers:
+      - name: kong-springboot
+        image: leopeng1995/kongspringboot:0.6
+        ports:
+        - containerPort: 8080
+        env:
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kong-springboot
+  labels:
+    app: kong-springboot
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: kong-springboot
+
+---
