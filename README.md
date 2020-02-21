@@ -2,10 +2,10 @@
 
 示例项目：通过Ingress访问服务A，服务A通过kong-proxy调用服务B。
 
-https://github.com/polaristech-io/kong-springboot
+https://github.com/leopeng1995/kong-springboot
 服务A代码（K8s相关配置在config目录下）
 
-https://github.com/polaristech-io/kong-springboot2
+https://github.com/leopeng1995/kong-springboot2
 服务B代码
 
 创建服务A的Deployment、Service：
