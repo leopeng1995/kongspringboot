@@ -21,7 +21,8 @@ config/kongspringboot2-application-openshift.yaml
 在Kong中创建服务B：
 config/kongspringboot2-ingress-openshift.yaml
 
-服务A调用服务B的代码片段：
+服务A调用服务B的代码片段（注：最好的方式是使用 Docker 环境变量将网关的地址、端口和路径注入到代码中，避免对代码的侵入性）：
+
 ```java
 public class ApplicationController {
     @GetMapping("/private")
